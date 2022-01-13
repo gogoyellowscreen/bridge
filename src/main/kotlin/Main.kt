@@ -15,7 +15,7 @@ private const val AWT = "awt"
 private const val JAVA_FX = "javafx"
 
 class Parameters : Arkenv() {
-    val graphFilepath: File by argument("--graph-path") {
+    val graphFile: File by argument("--graph-file") {
         description = "Graph filepath."
         mapping = {
             File(it.lowercase())
@@ -29,8 +29,8 @@ class Parameters : Arkenv() {
         description = "Graph structure."
         mapping = {
             when (it.lowercase()) {
-                MATRIX -> MatrixGraph(drawingApi)
-                EDGES -> EdgesGraph(drawingApi)
+                MATRIX -> MatrixGraph(drawingApi, graphFile)
+                EDGES -> EdgesGraph(drawingApi, graphFile)
                 else -> throw IllegalArgumentException("Graph structure should be '$MATRIX' or '$EDGES'")
             }
         }
@@ -55,9 +55,9 @@ fun main(args: Array<String>) {
         println(parameters.toString())
         return
     }
-    println("Hello World!")
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+//    parameters.run {
+//        graph.read(graphFilepath)
+//        graph.drawGraph()
+//    }
 }
