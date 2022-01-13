@@ -21,6 +21,19 @@ class MatrixGraph(drawingApi: DrawingApi, graphFile: File) : Graph(drawingApi) {
     }
 
     override fun drawGraph() {
-        TODO("Not yet implemented")
+        val nodeToDrawArea = calculateNodeDrawAreas(graph.size)
+
+        for (nodeFrom in graph.indices) {
+            drawingApi.drawCircle(nodeToDrawArea[nodeFrom], NODE_RADIUS)
+            for (nodeTo in nodeFrom + 1 until graph.size) {
+                if (graph[nodeFrom][nodeTo]) {
+                    drawingApi.drawLine(
+                        begin = circleCenter(nodeToDrawArea[nodeFrom]),
+                        end = circleCenter(nodeToDrawArea[nodeTo])
+                    )
+                }
+            }
+            drawingApi.drawNodeNumber(circleCenter(nodeToDrawArea[nodeFrom]), nodeFrom + 1)
+        }
     }
 }

@@ -23,6 +23,17 @@ class EdgesGraph(drawingApi: DrawingApi, graphFile: File) : Graph(drawingApi) {
     }
 
     override fun drawGraph() {
-        TODO("Not yet implemented")
+        val nodeToDrawArea = calculateNodeDrawAreas(graph.size)
+
+        for ((node, nodesTo) in graph.withIndex()) {
+            drawingApi.drawCircle(nodeToDrawArea[node], NODE_RADIUS)
+            for (nodeTo in nodesTo) {
+                drawingApi.drawLine(
+                    begin = circleCenter(nodeToDrawArea[node]),
+                    end = circleCenter(nodeToDrawArea[nodeTo])
+                )
+            }
+            drawingApi.drawNodeNumber(circleCenter(nodeToDrawArea[node]), node + 1)
+        }
     }
 }

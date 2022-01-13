@@ -1,10 +1,11 @@
 package drawing
 
-data class Coordinate(val x: Int, val y: Int)
+data class Coordinate(val x: Double, val y: Double)
 
 interface DrawingApi {
-    fun getDrawingAreaWidth(): Long
-    fun getDrawingAreaHeight(): Long
-    fun drawCircle(leftTop: Coordinate, radius: Int)
+    fun getDrawingAreaWidth(): Double
+    fun getDrawingAreaHeight(): Double
+    fun drawCircle(leftTop: Coordinate, radius: Double)
     fun drawLine(begin: Coordinate, end: Coordinate)
+    fun drawNodeNumber(nodeCenter: Coordinate, node: Int)
 }
