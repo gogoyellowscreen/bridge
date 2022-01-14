@@ -6,15 +6,11 @@ class FxDrawingApi(private val width: Double,
 
     override fun getDrawingAreaHeight() = height
 
-    override fun drawCircle(leftTop: Coordinate, radius: Double) {
+    override fun drawCircle(leftTop: Coordinate, radius: Int) {
         TODO("Not yet implemented")
     }
 
     override fun drawLine(begin: Coordinate, end: Coordinate) {
-        TODO("Not yet implemented")
-    }
-
-    override fun drawNodeNumber(nodeCenter: Coordinate, node: Int) {
         TODO("Not yet implemented")
     }
 }

@@ -33,7 +33,6 @@ class EdgesGraph(drawingApi: DrawingApi, graphFile: File) : Graph(drawingApi) {
                     end = circleCenter(nodeToDrawArea[nodeTo])
                 )
             }
-            drawingApi.drawNodeNumber(circleCenter(nodeToDrawArea[node]), node + 1)
         }
     }
 }

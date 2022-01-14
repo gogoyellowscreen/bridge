@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation("com.apurebase:arkenv:3.1.0")
+    implementation("org.openjfx:javafx-controls:17.0.0.1")
 
     testImplementation(kotlin("test"))
 }

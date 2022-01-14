@@ -33,7 +33,6 @@ class MatrixGraph(drawingApi: DrawingApi, graphFile: File) : Graph(drawingApi) {
                     )
                 }
             }
-            drawingApi.drawNodeNumber(circleCenter(nodeToDrawArea[nodeFrom]), nodeFrom + 1)
         }
     }
 }

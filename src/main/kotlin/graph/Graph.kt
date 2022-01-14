@@ -6,7 +6,7 @@ import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
 
-const val NODE_RADIUS = 5.0
+const val NODE_RADIUS = 5
 
 abstract class Graph(protected val drawingApi: DrawingApi) {
     private val areaRadius
@@ -25,7 +25,7 @@ abstract class Graph(protected val drawingApi: DrawingApi) {
     }
     
     protected fun circleCenter(leftTop: Coordinate,
-                               nodeRadius: Double = NODE_RADIUS): Coordinate {
+                               nodeRadius: Int = NODE_RADIUS): Coordinate {
         return Coordinate(leftTop.x + nodeRadius, leftTop.y + nodeRadius)
     }
 
