@@ -5,7 +5,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.util.*
 
-class MatrixGraph(drawingApi: DrawingApi, graphFile: File) : Graph(drawingApi) {
+class MatrixGraph(graphFile: File) : Graph() {
     private val graph: Array<Array<Boolean>>
 
     init {

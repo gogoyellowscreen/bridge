@@ -1,13 +1,17 @@
 import com.apurebase.arkenv.Arkenv
 import com.apurebase.arkenv.argument
 import com.apurebase.arkenv.parse
+import com.sun.glass.ui.Application
 import drawing.AwtDrawingApi
+import drawing.Coordinate
 import drawing.DrawingApi
 import drawing.FxDrawingApi
 import graph.EdgesGraph
 import graph.Graph
 import graph.MatrixGraph
 import java.io.File
+import java.util.concurrent.CountDownLatch
+import kotlin.concurrent.thread
 
 private const val MATRIX = "matrix"
 private const val EDGES = "edges"
@@ -29,21 +33,33 @@ class Parameters : Arkenv() {
         description = "Graph structure."
         mapping = {
             when (it.lowercase()) {
-                MATRIX -> MatrixGraph(drawingApi, graphFile)
-                EDGES -> EdgesGraph(drawingApi, graphFile)
+                MATRIX -> MatrixGraph(graphFile)
+                EDGES -> EdgesGraph(graphFile)
                 else -> throw IllegalArgumentException("Graph structure should be '$MATRIX' or '$EDGES'")
             }
         }
     }
 
-    val drawingApi: DrawingApi by argument("--drawing") {
+    val drawingApi: String by argument("--drawing") {
         description = "API for drawing graph."
-        mapping = {
-            when (it.lowercase()) {
-                AWT -> AwtDrawingApi()
-                JAVA_FX -> FxDrawingApi()
-                else -> throw IllegalArgumentException("Drawing API should be '$AWT' or '$JAVA_FX'")
-            }
+        validate("Should be '$AWT' or '$JAVA_FX'") {
+            it.lowercase() == AWT || it.lowercase() == JAVA_FX
+        }
+    }
+
+    val width: Double by argument("--width") {
+        description = "Window screen width."
+        defaultValue = { 1000.0 }
+        validate("Should be more than 0") {
+            it > 0
+        }
+    }
+
+    val height: Double by argument("--height") {
+        description = "Window screen height."
+        defaultValue = { 800.0 }
+        validate("Should be more than 0") {
+            it > 0
         }
     }
 }
@@ -56,8 +72,17 @@ fun main(args: Array<String>) {
         return
     }
 
-//    parameters.run {
-//        graph.read(graphFilepath)
-//        graph.drawGraph()
-//    }
+    parameters.run {
+        if (drawingApi.lowercase() == AWT) {
+            graph.drawingApi = AwtDrawingApi(width, height)
+            graph.drawGraph()
+        }
+
+        if (drawingApi.lowercase() == JAVA_FX) {
+            FxDrawingApi(width, height) {
+                graph.drawingApi = it
+                graph.drawGraph()
+            }
+        }
+    }
 }

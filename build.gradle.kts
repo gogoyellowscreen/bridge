@@ -3,6 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.5.10"
     application
+    id("org.openjfx.javafxplugin") version "0.0.10"
+}
+
+javafx {
+    version = "17.0.0.1"
+    modules("javafx.controls")
 }
 
 group = "me.ggys"

@@ -5,7 +5,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.util.*
 
-class EdgesGraph(drawingApi: DrawingApi, graphFile: File) : Graph(drawingApi) {
+class EdgesGraph(graphFile: File) : Graph() {
     private val graph: List<MutableList<Int>>
 
     init {

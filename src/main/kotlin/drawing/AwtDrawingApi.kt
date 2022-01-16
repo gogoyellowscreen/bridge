@@ -43,10 +43,10 @@ class AwtDrawingApi(private val width: Double,
 
     override fun getDrawingAreaHeight() = height
 
-    override fun drawCircle(leftTop: Coordinate, radius: Int) {
-        val ix = (xCenter + leftTop.x - radius / 2).toInt()
-        val iy = (yCenter + leftTop.y - radius / 2).toInt()
-        graphics.fillOval(ix, iy, radius, radius)
+    override fun drawCircle(leftTop: Coordinate, radius: Double) {
+        val ix = (xCenter + leftTop.x).toInt()
+        val iy = (yCenter + leftTop.y).toInt()
+        graphics.fillOval(ix, iy, radius.toInt(), radius.toInt())
         bufferStrategy.show()
     }
 

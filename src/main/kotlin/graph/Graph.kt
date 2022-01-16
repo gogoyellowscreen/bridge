@@ -6,11 +6,13 @@ import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
 
-const val NODE_RADIUS = 5
+const val NODE_RADIUS = 20.0
 
-abstract class Graph(protected val drawingApi: DrawingApi) {
+abstract class Graph {
+    lateinit var drawingApi: DrawingApi
+
     private val areaRadius
-        get() = min(drawingApi.getDrawingAreaHeight(), drawingApi.getDrawingAreaHeight()) / 2
+        get() = min(drawingApi.getDrawingAreaHeight(), drawingApi.getDrawingAreaHeight()) / 2 - NODE_RADIUS * 2
 
     @OptIn(ExperimentalStdlibApi::class)
     protected fun calculateNodeDrawAreas(nodesNumber: Int): List<Coordinate> {
@@ -25,8 +27,8 @@ abstract class Graph(protected val drawingApi: DrawingApi) {
     }
     
     protected fun circleCenter(leftTop: Coordinate,
-                               nodeRadius: Int = NODE_RADIUS): Coordinate {
-        return Coordinate(leftTop.x + nodeRadius, leftTop.y + nodeRadius)
+                               nodeRadius: Double = NODE_RADIUS): Coordinate {
+        return Coordinate(leftTop.x + nodeRadius / 2, leftTop.y + nodeRadius / 2)
     }
 
     abstract fun drawGraph()
