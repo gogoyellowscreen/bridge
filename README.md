@@ -1,5 +1,5 @@
 # bridge
-hw 5, software design.
+hw 5, software design. Abstraction - Graph, Implementation - DrawingApi.
 
 Some problems occure with run from IDEA on javafx param.
 
